@@ -9,7 +9,7 @@ pipeline {
             steps {
                 git "https://${GIT_TOKEN}@github.com/NaveenNkay/Jenkins-assesment.git"
                 // if authentication is required:
-                // git credentialsId: 'git-token', url: "https://github.com/NaveenNkay/Jenkins-assesment.git"
+                // git credentialsId: 'git-token', url: 'https://github.com/NaveenNkay/Jenkins-assesment.git', branch: 'main'
             }
         }
         stage('Terraform Init') {
