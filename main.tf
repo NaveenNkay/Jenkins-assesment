@@ -1,6 +1,6 @@
 provider "google" {
   project = "quick-assesment" 
-  region  = "us-central1"      
+  region  = "asia-east1"      
 }
 resource "google_compute_network" "assessment-vpc" {
   name                    = "assessment-vpc"
