@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git "https://$(GIT_TOKEN)@github.com/NaveenNkay/quick-assesment.git"
+                git "https://${GIT_TOKEN}@github.com/NaveenNkay/quick-assesment.git"
                 // if authentication is required:
                 // git credentialsId: 'git-token', url: "https://github.com/NaveenNkay/quick-assesment.git"
             }
