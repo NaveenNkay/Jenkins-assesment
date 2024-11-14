@@ -35,7 +35,7 @@ pipeline {
                     sh "go mod init github.com/NaveenNkay/Jenkins-assesment.git/test"
                     sh "go get github.com/gruntwork-io/terratest/modules/terraform"
                     sh "go get github.com/stretchr/testify/assert"
-                    sh "go test -v -timeout 30m" || exit 1
+                    sh "go test -v -timeout 30m || exit 1"
                 }
             }
         }
