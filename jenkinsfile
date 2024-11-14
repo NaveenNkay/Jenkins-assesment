@@ -21,7 +21,7 @@ pipeline {
         stage('Terraform Validate') {
             steps {
                 script {
-                    // Validate Terraform configuration
+                    // Validate Terraform configuration of terraform
                     sh 'terraform validate'
                 }
             }
