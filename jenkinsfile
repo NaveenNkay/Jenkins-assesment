@@ -26,6 +26,14 @@ pipeline {
                 }
             }
         }
+        stage('Terraform State-list') {
+            steps {
+                script {
+                    // Validate Terraform configuration of terraform config
+                    sh 'terraform state list'
+                }
+            }
+        }
         stage('Terraform Plan') {
             steps {
                 script {
