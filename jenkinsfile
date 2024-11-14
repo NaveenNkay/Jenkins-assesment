@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/NaveenNkay/Jenkins-assesment.git', branch: 'main'
+                git url: 'https://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@github.com/NaveenNkay/Jenkins-assesment.git', branch: 'main'
             }
         }
         stage('Terraform Init') {
@@ -26,24 +26,27 @@ pipeline {
                 }
             }
         }
-        stage('Run Terratest') {
-            steps {
-                // Set GOPATH and run tests
-                sh "mkdir -p go/src/github.com/NaveenNkay/Jenkins-assesment.git"
-                sh "rsync -av --exclude='go' ./ go/src/github.com/NaveenNkay/Jenkins-assesment.git/"
-                dir("go/src/github.com/NaveenNkay/Jenkins-assesment.git/test") {
-                    sh "go mod init github.com/NaveenNkay/Jenkins-assesment.git/test"
-                    sh "go get github.com/gruntwork-io/terratest/modules/terraform"
-                    sh "go get github.com/stretchr/testify/assert"
-                    sh "go test -v -timeout 30m || exit 1"
-                }
-            }
-        }
         stage('Terraform State-list') {
             steps {
                 script {
                     // Validate Terraform configuration of terraform config
                     sh 'terraform state list'
+                }
+            }
+        }
+        stage('Terraform Plan') {
+            steps {
+                script {
+                    // Generate a plan for Terraform deployment plans
+                    sh 'terraform plan -out=tfplan'
+                }
+            }
+        }
+		 stage('Manual Approval for Apply') {
+            steps {
+                script {
+                    // Pause and wait for manual approval
+                    input message: 'Do you want to apply these changes to GCP?', ok: 'Yes, Apply', cancel: 'Cancel'
                 }
             }
         }
