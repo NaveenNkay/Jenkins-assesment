@@ -37,20 +37,21 @@ pipeline {
         }
     }
  post {
-        always {
-            // Notify via email after the pipeline run (success, failure, or unstable)
-            emailext (
-                to: "${EMAIL_RECIPIENT}",
-                subject: "Jenkins Build - ${currentBuild.currentResult}: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: """
-                Build Result: ${currentBuild.currentResult}
-                Job: ${env.JOB_NAME}
-                Build Number: ${env.BUILD_NUMBER}
-                Build URL: ${env.BUILD_URL}
-                Git Commit: ${env.GIT_COMMIT}
-                """,
-                attachLog: true // Attach the build log to the email
-            )
-        }
+    success {
+        emailext (
+            to: "${EMAIL_RECIPIENT}",
+            subject: "Jenkins Build Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: "The build was successful! Check it out: ${env.BUILD_URL}",
+            attachLog: true
+        )
     }
+    failure {
+        emailext (
+            to: "${EMAIL_RECIPIENT}",
+            subject: "Jenkins Build Failure: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: "The build failed! Please check the logs: ${env.BUILD_URL}",
+            attachLog: true
+        )
+    }
+}
 }
