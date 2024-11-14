@@ -26,6 +26,19 @@ pipeline {
                 }
             }
         }
+        stage('Run Terratest') {
+            steps {
+                // Set GOPATH and run tests
+                sh "mkdir -p go/src/github.com/NaveenNkay/Jenkins-assesment.git"
+                sh "cp -r . go/src/github.com/NaveenNkay/Jenkins-assesment.git/"
+                dir("go/src/github.com/NaveenNkay/Jenkins-assesment.git/test") {
+                    sh "go mod init github.com/NaveenNkay/Jenkins-assesment.git/test"
+                    sh "go get github.com/gruntwork-io/terratest/modules/terraform"
+                    sh "go get github.com/stretchr/testify/assert"
+                    sh "go test -v -timeout 30m"
+                }
+            }
+        }
         stage('Terraform State-list') {
             steps {
                 script {
