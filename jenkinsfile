@@ -34,13 +34,5 @@ pipeline {
                 }
             }
         }
-        stage('Terraform Plan') {
-            steps {
-                script {
-                    // Generate a plan for Terraform deployment plans
-                    sh 'terraform plan -out=tfplan'
-                }
-            }
-        }
     }
 }
