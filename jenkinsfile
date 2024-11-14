@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url "https://${GIT_TOKEN}@github.com/NaveenNkay/Jenkins-assesment.git", branch: 'main'
+                git url: 'https://${GIT_TOKEN}@github.com/NaveenNkay/Jenkins-assesment.git', branch: 'main'
             }
         }
         stage('Terraform Init') {
