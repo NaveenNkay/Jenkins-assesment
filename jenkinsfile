@@ -14,7 +14,7 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 script {
-                    // Initialize Terraform and configure remote backend for state storage in GCS
+                    // Initialize Terraform and configure remote backend for state storage
                     sh 'terraform init'
                 }
             }
